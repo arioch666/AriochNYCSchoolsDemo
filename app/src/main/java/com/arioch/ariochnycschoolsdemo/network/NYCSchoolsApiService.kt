@@ -7,6 +7,10 @@ import retrofit2.http.GET
 
 /**
  * Retrofit service that will provide access to the NYC Schools data.
+ *
+ * @see RetrofitProvider
+ *
+ * @author Arioch
  */
 interface NYCSchoolsApiService {
     /**

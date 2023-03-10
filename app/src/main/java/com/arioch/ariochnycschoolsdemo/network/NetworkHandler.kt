@@ -11,6 +11,16 @@ import java.io.IOException
 /**
  * Handles all the network requests for the application. Provides a central place for error handling
  * as well as providing accurate network state.
+ *
+ * @see NetworkResult
+ *
+ * @property networkStateFlow The Flow for the [NetworkState].
+ * @see NetworkState
+ *
+ * @property networkResultFlow The Flow for the [NetworkResult].
+ * @see NetworkResult
+ *
+ * @author Arioch
  */
 class NetworkHandler private constructor() {
     private val mutableNetworkStateFlow = MutableStateFlow<NetworkState>(NetworkState.Idle)
@@ -22,8 +32,16 @@ class NetworkHandler private constructor() {
      * Makes the network requests passed in.
      *
      * Central place for handling error cases
+     *
+     * @param isNetworkConnected Boolean - true if the network is connected.
+     *
+     * @param request The network request to execute.
+     *
+     * Handles emitting the [NetworkState] and [NetworkResult] to the [networkStateFlow] and
+     * [networkResultFlow] respectively.
      */
-    private suspend inline fun <T> makeNetworkRequest(isNetworkConnected: Boolean, request: ()-> Response<T>) {
+    private suspend inline fun <T> makeNetworkRequest(isNetworkConnected: Boolean,
+                                                      request: ()-> Response<T>) {
         if (isNetworkConnected.not()) {
             mutableNetworkStateFlow.emit(NetworkState.NotConnected)
         } else {
@@ -58,6 +76,8 @@ class NetworkHandler private constructor() {
 
     /**
      * Makes the network request for NYC Schools 2018 data.
+     *
+     * @param isNetworkConnected Boolean - true if the network is connected.
      */
     suspend fun getNYCSchools2018Info(isNetworkConnected: Boolean) {
         makeNetworkRequest(isNetworkConnected) {
@@ -67,6 +87,8 @@ class NetworkHandler private constructor() {
 
     /**
      * Makes the network reuqest for NYC Schools 2022 SAT Data.
+     *
+     * @param isNetworkConnected Boolean - true if the network is connected.
      */
     suspend fun getNYCSchools2022Info(isNetworkConnected: Boolean) {
         makeNetworkRequest(isNetworkConnected = isNetworkConnected) {
