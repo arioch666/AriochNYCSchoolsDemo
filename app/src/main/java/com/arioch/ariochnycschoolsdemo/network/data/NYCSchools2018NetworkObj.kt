@@ -1,7 +1,17 @@
 package com.arioch.ariochnycschoolsdemo.network.data
 
+import com.arioch.ariochnycschoolsdemo.model.entity.NYCSchools2018Entity
 import com.google.gson.annotations.SerializedName
 
+/**
+ * Represents the NYCSchools2018 data received from the endpoint.
+ *
+ * This object will only be used in the network layer and the other layers will use different
+ * objects.
+ *
+ * Creating separation of layers with translating objects between layers allows easy replacement of
+ * existing components if there is a need in the future.
+ */
 data class NYCSchools2018NetworkObj(
     val boro: String,
     val borough: String,
@@ -24,3 +34,23 @@ data class NYCSchools2018NetworkObj(
     val website: String,
     val zip: String
 )
+
+/**
+ * Converts the NYCSchools2018NetworkObj into the NYCSchools2019Entity for storage.
+ */
+fun NYCSchools2018NetworkObj.toNYCSchools2018Entity() = NYCSchools2018Entity(
+                                                            boro = boro,
+                                                            borough = borough,
+                                                            city = city,
+                                                            dbn = dbn,
+                                                            latitude = latitude,
+                                                            location = location,
+                                                            longitude = longitude,
+                                                            neighborhood = neighborhood,
+                                                            phoneNumber = phoneNumber,
+                                                            schoolName = schoolName,
+                                                            startTime = startTime,
+                                                            stateCode = stateCode,
+                                                            totalStudents = totalStudents,
+                                                            website = website,
+                                                            zip = zip)
