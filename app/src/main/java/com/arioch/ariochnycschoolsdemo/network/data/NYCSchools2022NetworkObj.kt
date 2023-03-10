@@ -12,6 +12,14 @@ import com.google.gson.annotations.SerializedName
  *
  * Creating separation of layers with translating objects between layers allows easy replacement of
  * existing components if there is a need in the future.
+ *
+ * @param dbn The unique identifier for the school.
+ * @param numberOfSATTestTakers The number of students who took the SAT.
+ * @param satCriticalReadingAvgScore The average score for the critical reading section of the SAT.
+ * @param satMathAvgScore The average score for the math section of the SAT.
+ * @param satWritingAvgScore The average score for the writing section of the SAT.
+ *
+ * @author Arioch
  */
 data class NYCSchools2022NetworkObj(
     val dbn: String,
@@ -35,3 +43,7 @@ fun NYCSchools2022NetworkObj.toNYCSchools2022Entity() = NYCSchools2022Entity(
     satMathAvgScore,
     satWritingAvgScore
 )
+
+fun List<NYCSchools2022NetworkObj>.toNYCSchools2022EntityList() = map {nycSchools2022NetworkObj ->
+    nycSchools2022NetworkObj.toNYCSchools2022Entity()
+}

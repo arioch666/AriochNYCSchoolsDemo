@@ -12,9 +12,14 @@ import kotlinx.coroutines.sync.withLock
  *
  * Includes methods that will make network calls and DB interactions.
  * 
- * Handles determination of network vs local data fetch. 
+ * Handles determination of network vs local data fetch.
+ *
+ * @param nycSchools2022DAO The DAO for the NYCSchools2022 table.
+ * @see NYCSchools2022DAO
+ *
+ * @author Arioch
  */
-class NYCSchools2022Repo private constructor(private val nycSchools2022DAO: NYCSchools2022DAO) {
+class NYCSchools2022Repo(private val nycSchools2022DAO: NYCSchools2022DAO) {
     private val networkRepo = NetworkRepo.getInstance()
     private val nycSchools2022EntityDataFlow = nycSchools2022DAO.getAllNYCSchools()
     private val nycSchools2022NetworkDataFlow = networkRepo.networkResultFlow.filterIsInstance<NetworkResult.NetworkSuccess<*>>()
@@ -25,6 +30,9 @@ class NYCSchools2022Repo private constructor(private val nycSchools2022DAO: NYCS
      *
      * Since room runs all queries on a different thread there is no need to make this a
      * suspend function.
+     *
+     * @param nycSchools2022Entities The NYCSchools2022Entity objects to insert into the DB.
+     * @see NYCSchools2022Entity
      */
     suspend fun insertIntoDBNYCSchools2022Data(vararg nycSchools2022Entities: NYCSchools2022Entity) {
         mutex.withLock {
@@ -35,6 +43,8 @@ class NYCSchools2022Repo private constructor(private val nycSchools2022DAO: NYCS
     /**
      * Triggers a network request for the NYCSchools2022Data from the network if the
      * @param forceNetworkFetch is true.
+     * @param isNetworkConnected If false, will prevent a network request.
+     * @see NetworkRepo.getNYCSchools2022
      */
     suspend fun fetchNYCSchools2022Data(forceNetworkFetch: Boolean, isNetworkConnected: Boolean) {
         if (forceNetworkFetch) {
@@ -45,6 +55,9 @@ class NYCSchools2022Repo private constructor(private val nycSchools2022DAO: NYCS
 
     /**
      * Passes on the request for NYCSchools2022Data to the [networkRepo].
+     *
+     * @param isNetworkConnected If false, will prevent a network request.
+     * @see NetworkRepo.getNYCSchools2022
      */
     private suspend fun requestNYC2022DataFromNetwork(isNetworkConnected: Boolean) {
         networkRepo.getNYCSchools2022(isNetworkConnected)

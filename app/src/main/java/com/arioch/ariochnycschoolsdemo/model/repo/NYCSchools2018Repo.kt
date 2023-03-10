@@ -13,11 +13,20 @@ import kotlinx.coroutines.sync.withLock
  * Includes methods that will make network calls and DB interactions.
  *
  * Handles determination of network vs local data fetch.
+ *
+ * @param nycSchools2018DAO The DAO for the NYCSchools2018 table.
+ * @see NYCSchools2018DAO
+ *
+ * @author Arioch
  */
-class NYCSchools2018Repo private constructor(private val nycSchools2018DAO: NYCSchools2018DAO) {
+class NYCSchools2018Repo(private val nycSchools2018DAO: NYCSchools2018DAO) {
+
     private val networkRepo = NetworkRepo.getInstance()
-    private val nycSchools2018EntityDataFlow = nycSchools2018DAO.getAllNYCSchools()
-    private val nycSchools2018NetworkDataFlow = networkRepo.networkResultFlow.filterIsInstance<NetworkResult.NetworkSuccess<*>>()
+    private val nycSchools2018NetworkDataFlow = networkRepo
+                                                .networkResultFlow
+                                                .filterIsInstance<NetworkResult.NetworkSuccess<*>>()
+
+    val nycSchools2018EntityDataFlow = nycSchools2018DAO.getAllNYCSchools()
 
 
 
@@ -26,6 +35,8 @@ class NYCSchools2018Repo private constructor(private val nycSchools2018DAO: NYCS
      *
      * Since room runs all queries on a different thread there is no need to make this a
      * suspend function.
+     *
+     * @param nycSchools2018Entities The NYCSchools2018Entity objects to insert into the DB.
      */
     suspend fun insertIntoDBNYCSchools2018Data(vararg nycSchools2018Entities: NYCSchools2018Entity) {
         mutex.withLock {
@@ -34,8 +45,9 @@ class NYCSchools2018Repo private constructor(private val nycSchools2018DAO: NYCS
     }
 
     /**
-     * Triggers a network request for the NYCSchools2018Data from the network if the
-     * @param forceNetworkFetch is true.
+     * Triggers a network request for the NYCSchools2018Data
+     * @param forceNetworkFetch If true, will trigger a network request for the NYCSchools2018Data.
+     * @param isNetworkConnected If false, will prevent a network request.
      */
     suspend fun fetchNYCSchools2018Data(forceNetworkFetch: Boolean, isNetworkConnected: Boolean) {
         if (forceNetworkFetch) {
@@ -46,6 +58,8 @@ class NYCSchools2018Repo private constructor(private val nycSchools2018DAO: NYCS
 
     /**
      * Passes on the request for NYCSchools2018Data to the [networkRepo].
+     *
+     * @param isNetworkConnected If false, will prevent a network request.
      */
     private suspend fun requestNYC2018DataFromNetwork(isNetworkConnected: Boolean) {
         networkRepo.getNYCSchools2018(isNetworkConnected)

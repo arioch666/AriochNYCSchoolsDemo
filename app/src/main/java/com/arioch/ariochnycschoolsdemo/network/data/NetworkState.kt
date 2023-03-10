@@ -2,6 +2,12 @@ package com.arioch.ariochnycschoolsdemo.network.data
 
 /**
  * Used to communicate the state of the network.
+ *
+ * @see Idle
+ * @see Loading
+ * @see NotConnected
+ *
+ * @author Arioch
  */
 sealed interface NetworkState {
     /**

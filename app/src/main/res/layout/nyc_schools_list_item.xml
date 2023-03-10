@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginBottom="24dp"
+    >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:padding="16dp"
+        >
+        <TextView
+            android:id="@+id/textView_school_name"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+            android:gravity="center"
+
+            android:textStyle="bold"
+            android:textSize="20sp"
+
+            tools:text="school name will go here."
+            />
+
+        <TextView
+            android:id="@+id/textView_total_students"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="8dp"
+
+            app:layout_constraintTop_toBottomOf="@id/textView_school_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            android:textAlignment="center"
+
+            tools:text="total students will go here."
+            />
+
+
+        <TextView
+            android:id="@+id/textView_borough"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="16dp"
+
+            app:layout_constraintTop_toBottomOf="@id/textView_total_students"
+            app:layout_constraintStart_toStartOf="parent"
+
+            tools:text="borough will go here."
+            />
+
+        <TextView
+            android:id="@+id/textView_neighborhood"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="16dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView_total_students"
+
+            tools:text="neighborhood will go here."
+            />
+
+        <TextView
+            android:id="@+id/textView_city"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="8dp"
+
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView_borough"
+
+            tools:text="city will go here."
+            />
+
+
+
+        <TextView
+            android:id="@+id/textView_zip"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="8dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_neighborhood"
+            tools:text="zip will go here."
+            />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout_school_info"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="16dp"
+
+
+            app:layout_constraintTop_toBottomOf="@+id/textView_city"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            android:visibility="gone"
+            >
+
+            <TextView android:id="@+id/textView_number_of_sat_test_takers"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+
+                tools:text="@string/number_of_sat_test_takers"
+                />
+
+            <TextView android:id="@+id/textView_sat_critical_reading_avg_score"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="8dp"
+
+                app:layout_constraintTop_toBottomOf="@+id/textView_number_of_sat_test_takers"
+                app:layout_constraintStart_toStartOf="parent"
+
+                tools:text="@string/sat_critical_reading_avg_score"
+                />
+
+            <TextView android:id="@+id/textView_sat_math_avg_score"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="8dp"
+
+                app:layout_constraintTop_toBottomOf="@+id/textView_sat_critical_reading_avg_score"
+                app:layout_constraintStart_toStartOf="parent"
+
+                tools:text="@string/sat_math_avg_score"
+                />
+
+            <TextView android:id="@+id/textView_sat_writing_avg_score"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="8dp"
+
+                    app:layout_constraintTop_toBottomOf="@+id/textView_sat_math_avg_score"
+                    app:layout_constraintStart_toStartOf="parent"
+
+                    tools:text="@string/sat_writing_avg_score"
+                    />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

@@ -9,6 +9,8 @@ import kotlinx.coroutines.flow.Flow
  * Provides access to the network.
  *
  * There are flows for the network state and the networkResult.
+ *
+ * @author Arioch
  */
 class NetworkRepo private constructor() {
     private val networkHandler = NetworkHandler.getNetworkHandler()
@@ -17,6 +19,8 @@ class NetworkRepo private constructor() {
 
     /**
      * Passes on the request to the [networkHandler] requesting the NYC 2018 data.
+     *
+     * @param isNetworkConnected Boolean - true if the network is connected.
      */
     suspend fun getNYCSchools2018(isNetworkConnected: Boolean) {
         networkHandler.getNYCSchools2018Info(isNetworkConnected)
@@ -24,6 +28,8 @@ class NetworkRepo private constructor() {
 
     /**
      * Requests the NYC 2022 SAT data through the [networkHandler]
+     *
+     * @param isNetworkConnected Boolean - true if the network is connected.
      */
     suspend fun getNYCSchools2022(isNetworkConnected: Boolean) {
         networkHandler.getNYCSchools2022Info(isNetworkConnected)

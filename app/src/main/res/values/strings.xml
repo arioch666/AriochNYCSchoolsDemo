@@ -6,6 +6,15 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+    <string name="fetch_data">FETCH</string>
+    <string name="number_of_sat_test_takers">No. of SAT Test Takers: %1$s</string>
+    <string name="sat_critical_reading_avg_score">SAT Critical Reading Avg. Score: %1$s</string>
+    <string name="sat_math_avg_score">SAT Math Avg. Score: %1$s</string>
+    <string name="sat_writing_avg_score">SAT Writing Avg. Score: %1$s</string>
+    <string name="total_number_of_students">Total Number Of Students: %1$s</string>
+    <string name="network_disconnected">It appears there is no internet connection.</string>
+    <string name="schools_list_empty">There do not appear to be any schools to show at the moment.</string>
+
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
